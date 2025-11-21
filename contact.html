@@ -14,22 +14,34 @@
       if (html.lang === 'fa') {
         html.lang = 'en';
         html.dir = 'ltr';
-        document.querySelector('.lang-toggle').textContent = 'فارسی';
-        document.querySelectorAll('[data-en]').forEach(el => {
-          el.textContent = el.getAttribute('data-en');
-        });
+        localStorage.setItem('preferredLang', 'en');
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'فارسی');
+        document.querySelectorAll('[data-en]').forEach(el => el.textContent = el.getAttribute('data-en'));
       } else {
         html.lang = 'fa';
         html.dir = 'rtl';
-        document.querySelector('.lang-toggle').textContent = 'English';
-        document.querySelectorAll('[data-fa]').forEach(el => {
-          el.textContent = el.getAttribute('data-fa');
-        });
+        localStorage.setItem('preferredLang', 'fa');
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'English');
+        document.querySelectorAll('[data-fa]').forEach(el => el.textContent = el.getAttribute('data-fa'));
       }
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferredLang') || 'fa';
+      const html = document.documentElement;
+      if (savedLang === 'en') {
+        html.lang = 'en';
+        html.dir = 'ltr';
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'فارسی');
+        document.querySelectorAll('[data-en]').forEach(el => el.textContent = el.getAttribute('data-en'));
+      } else {
+        html.lang = 'fa';
+        html.dir = 'rtl';
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'English');
+      }
+    });
   </script>
   <style>
-    .lang-toggle {
+  .lang-toggle {
       background: none;
       border: none;
       color: #2a2a2a;
@@ -39,16 +51,16 @@
       border-radius: 4px;
       transition: background 0.2s;
     }
-    .lang-toggle:hover {
+  .lang-toggle:hover {
       background: #f0f0f0;
     }
-    .map-container {
+  .map-container {
       margin-top: 2.5rem;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
-    .map-container iframe {
+  .map-container iframe {
       width: 100%;
       height: 300px;
       border: none;
@@ -85,7 +97,6 @@
       <button class="lang-toggle" onclick="toggleLang()" style="width: 100%; margin-top: 1rem;">English</button>
     </nav>
   </header>
-
   <!-- Contact Section -->
   <section class="contact-section">
     <div class="container">
@@ -94,7 +105,7 @@
         <div class="contact-info">
           <div class="contact-item">
             <h3 data-fa="تلفن / واتساپ" data-en="Phone / WhatsApp">تلفن / واتساپ</h3>
-            <p>+98 991 868 1838</p>
+            <p>+989918681838</p>
           </div>
           <div class="contact-item">
             <h3 data-fa="ایمیل" data-en="Email">ایمیل</h3>
@@ -105,7 +116,6 @@
             <p data-fa="آذربایجان شرقی، تبریز، دانشگاه هنر تبریز، کارگاه شماره ۲۶" data-en="Tabriz University of Art, Workshop #26, East Azerbaijan, Iran">آذربایجان شرقی، تبریز، دانشگاه هنر تبریز، کارگاه شماره ۲۶</p>
           </div>
         </div>
-
         <div class="map-container">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3065.474596468886!2d46.27933657675673!3d38.08384997971564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b5a7e3c0b1b1b%3A0x1b1b1b1b1b1b1b1b!2sTabriz%20University%20of%20Art!5e0!3m2!1sen!2sus!4v1732188000000!5m2!1sen!2sus"
@@ -114,7 +124,6 @@
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
-
         <div class="contact-actions">
           <a href="https://wa.me/989918681838" class="btn" target="_blank" rel="noopener">
             <span data-fa="پیام از طریق واتساپ" data-en="Message via WhatsApp">پیام از طریق واتساپ</span>
@@ -126,7 +135,6 @@
       </div>
     </div>
   </section>
-
   <!-- Footer -->
   <footer class="glass-footer">
     <div class="container">
