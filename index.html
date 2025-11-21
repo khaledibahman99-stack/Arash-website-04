@@ -14,23 +14,34 @@
       if (html.lang === 'fa') {
         html.lang = 'en';
         html.dir = 'ltr';
-        document.querySelector('.lang-toggle').textContent = 'فارسی';
-        // تغییر متن‌ها به انگلیسی
-        document.querySelectorAll('[data-en]').forEach(el => {
-          el.textContent = el.getAttribute('data-en');
-        });
+        localStorage.setItem('preferredLang', 'en');
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'فارسی');
+        document.querySelectorAll('[data-en]').forEach(el => el.textContent = el.getAttribute('data-en'));
       } else {
         html.lang = 'fa';
         html.dir = 'rtl';
-        document.querySelector('.lang-toggle').textContent = 'English';
-        document.querySelectorAll('[data-fa]').forEach(el => {
-          el.textContent = el.getAttribute('data-fa');
-        });
+        localStorage.setItem('preferredLang', 'fa');
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'English');
+        document.querySelectorAll('[data-fa]').forEach(el => el.textContent = el.getAttribute('data-fa'));
       }
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferredLang') || 'fa';
+      const html = document.documentElement;
+      if (savedLang === 'en') {
+        html.lang = 'en';
+        html.dir = 'ltr';
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'فارسی');
+        document.querySelectorAll('[data-en]').forEach(el => el.textContent = el.getAttribute('data-en'));
+      } else {
+        html.lang = 'fa';
+        html.dir = 'rtl';
+        document.querySelectorAll('.lang-toggle').forEach(btn => btn.textContent = 'English');
+      }
+    });
   </script>
   <style>
-    .lang-toggle {
+  .lang-toggle {
       background: none;
       border: none;
       color: #2a2a2a;
@@ -40,7 +51,7 @@
       border-radius: 4px;
       transition: background 0.2s;
     }
-    .lang-toggle:hover {
+  .lang-toggle:hover {
       background: #f0f0f0;
     }
   </style>
@@ -75,7 +86,6 @@
       <button class="lang-toggle" onclick="toggleLang()" style="width: 100%; margin-top: 1rem;">English</button>
     </nav>
   </header>
-
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-image" style="background-image: url('https://i.ibb.co/spzPm5D5/featured1.png');"></div>
@@ -84,7 +94,6 @@
  <p><a href="#products" data-fa="مجموعه‌ها را ببینید →" data-en="Explore our collections →">مجموعه‌ها را ببینید →</a></p>
     </div>
   </section>
-
   <!-- Featured Collections -->
   <section id="products" class="featured-collections">
     <div class="container">
@@ -92,17 +101,16 @@
         <div class="collection-card">
           <h2 data-fa="نویز کالکشنز" data-en="Noise Collections">نویز کالکشنز</h2>
           <p data-fa="جاکلیدی چرمی و جامدادی پارچه‌ای دست‌ساز" data-en="Handmade leather key holders & fabric pencil cases">جاکلیدی چرمی و جامدادی پارچه‌ای دست‌ساز</p>
-          <a href="products-noise.html" class="btn" data-fa="مشاهده مجموعه" data-en="View Collection"> مشاهده مجموعه </a>
+          <a href="products-noise.html" class="btn" data-fa="مشاهده مجموعه" data-en="View Collection">مشاهده مجموعه</a>
         </div>
         <div class="collection-card">
           <h2 data-fa="دووا" data-en="Dova">دووا</h2>
           <p data-fa="کیف‌های دست‌دوز و جعبه‌های پارچه‌ای" data-en="Hand-stitched fabric handbags & pouches">کیف‌های دست‌دوز و جعبه‌های پارچه‌ای</p>
-          <a href="products-dova.html" class="btn" data-fa="مشاهده مجموعه" data-en="View Collection"> مشاهده مجموعه </a>
+          <a href="products-dova.html" class="btn" data-fa="مشاهده مجموعه" data-en="View Collection">مشاهده مجموعه</a>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Footer -->
   <footer class="glass-footer">
     <div class="container">
@@ -111,5 +119,4 @@
   </footer>
   <script src="script.js"></script>
 </body>
-
 </html>
